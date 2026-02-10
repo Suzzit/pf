@@ -4,152 +4,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>Systemd-nspawn Container Lessons</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 2rem;
-            background: #f9f9f9;
-            color: #333;
-        }
-
-        h1,
-        h2 {
-            color: #2c3e50;
-        }
-
-        h2 {
-            margin-top: 2rem;
-        }
-
-        p {
-            margin: 0.5rem 0;
-        }
-
-        ul {
-            margin: 0.5rem 0 1rem 2rem;
-        }
-
-        code {
-            background: #eee;
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-    </style>
+    <link rel="stylesheet" href="./blog.css">
+    <title>Lessons from Building a systemd-nspawn Container</title>
 </head>
 
 <body>
+
+    <header>
+        <h1>Lessons Learned from Building a systemd-nspawn Container</h1>
+        <p>A practical journey through containers, networking, and Linux internals</p>
+    </header>
+
     <div class="container">
-        <h1>Lessons Learned from Building a Systemd-nspawn Container</h1>
 
-        <h2>1. You tried to build a container the honest way</h2>
-        <p>You chose <code>systemd-nspawn</code>, not Docker. That matters:</p>
-        <ul>
-            <li>No daemon babysitting you</li>
-            <li>No hidden NAT rules</li>
-            <li>No “it just works” fairy dust</li>
-        </ul>
-        <p>You created a container root filesystem and tried to bootstrap Arch + nginx into it.</p>
-        <p>Reality check: it immediately failed because your root partition was full. That wasn’t a container problem —
-            that
-            was disk accounting.</p>
+        <article>
+            <div class="meta">Section 1</div>
+            <h2>You tried to build a container the honest way</h2>
 
-        <h2>2. You hit real storage limits (and didn’t ignore them)</h2>
-        <p>You discovered:</p>
-        <ul>
-            <li>No free space on /</li>
-            <li>sda3 had ~98 GB, with ~5 GB realistically spare</li>
-        </ul>
-        <p>Core lesson:</p>
-        <ul>
-            <li>Filesystems ≠ partitions ≠ mount points</li>
-            <li>To make space, you must shrink the filesystem, then shrink the partition, then create a new partition.
-            </li>
-            <li>This usually requires offline or rescue mode discipline.</li>
-        </ul>
-        <p>You also learned why live USBs exist, why resizing mounted partitions is forbidden, and why LVM exists to
-            avoid
-            this pain entirely. Even before containers, you were already doing sysadmin work.</p>
+            <p>You chose <code>systemd-nspawn</code>, not Docker. That matters:</p>
+            <ul>
+                <li>No daemon babysitting you</li>
+                <li>No hidden NAT rules</li>
+                <li>No “it just works” fairy dust</li>
+            </ul>
 
-        <h2>3. You met systemd’s sharp edges (masked services)</h2>
-        <p>When you tried to fix container networking, <code>systemd-networkd</code> refused to start because it was
-            masked.
-        </p>
-        <p>You learned:</p>
-        <ul>
-            <li>Masked ≠ stopped</li>
-            <li>Masked = “this service is not allowed to exist”</li>
-        </ul>
-        <p>NetworkManager commonly masks networkd on desktops. This wasn’t random breakage — it was a policy decision
-            made
-            earlier.</p>
+            <p>You created a container root filesystem and tried to bootstrap Arch + nginx into it.</p>
 
-        <h2>4. You learned host vs container separation (critical insight)</h2>
-        <p>You accidentally started <code>systemd-networkd</code> on the host while using Wi-Fi + NetworkManager.</p>
-        <p>Result: Host internet died. Not because of containers, but because two network managers fought over
-            ownership.
-        </p>
-        <p>Key realization:</p>
-        <ul>
-            <li>Host and container are separate operating systems</li>
-            <li>Correct architecture: Host → NetworkManager (Wi-Fi stays sane), Container → systemd-networkd +
-                systemd-resolved</li>
-        </ul>
-        <p>That single separation fixed half the chaos.</p>
+            <p>Reality check: it immediately failed because your root partition was full. That wasn’t a container
+                problem — that was disk accounting.</p>
+        </article>
 
-        <h2>5. You created a container network by hand</h2>
-        <p>You learned that <code>--network-veth</code> only creates a cable. It does not assign IPs, configure DNS, or
-            care
-            about your Wi-Fi.</p>
-        <p>Inside the container, you had to:</p>
-        <ul>
-            <li>Enable <code>systemd-networkd</code></li>
-            <li>Create a <code>.network</code> file</li>
-            <li>Request DHCP explicitly</li>
-        </ul>
-        <p>Only then did the container get an IP.</p>
+        <article>
+            <div class="meta">Section 2</div>
+            <h2>You hit real storage limits (and didn’t ignore them)</h2>
 
-        <h2>6. You debugged DNS like a grown-up</h2>
-        <p>When IP pings worked but domains didn’t, you learned:</p>
-        <ul>
-            <li>That’s DNS broken, not “internet broken”</li>
-            <li>Inspect <code>/etc/resolv.conf</code></li>
-            <li>Enable <code>systemd-resolved</code> inside the container, fix the symlink, restart services</li>
-        </ul>
-        <p>Result: IP routing worked, name resolution worked, and the container finally spoke fluent internet.</p>
-        <p>Painful truth: <code>ping 0.0.0.0</code> proves nothing.</p>
+            <p>You discovered:</p>
+            <ul>
+                <li>No free space on /</li>
+                <li>sda3 had ~98 GB, with ~5 GB realistically spare</li>
+            </ul>
 
-        <h2>7. What you actually built (end state)</h2>
-        <p>By the end, you had a real Linux container with its own:</p>
-        <ul>
-            <li>Filesystem</li>
-            <li>Init system</li>
-            <li>Network stack</li>
-            <li>DNS resolver</li>
-            <li>Working NAT’d network on Wi-Fi</li>
-        </ul>
-        <p>You also developed a clear mental model of:</p>
-        <ul>
-            <li>How Docker hides complexity</li>
-            <li>How Linux actually moves packets</li>
-            <li>Why production failures feel “mysterious” to people who skip this step</li>
-        </ul>
-        <p>No magic. No abstractions lying to you. Just cause → effect → fix.</p>
+            <p>Core lessons:</p>
+            <ul>
+                <li>Filesystems ≠ partitions ≠ mount points</li>
+                <li>Resizing requires shrinking filesystem → partition → new allocation</li>
+                <li>Offline discipline is often mandatory</li>
+            </ul>
 
-        <h2>The deeper outcome</h2>
-        <p>You didn’t just “set up a container”. You learned:</p>
-        <ul>
-            <li>Why disks run out</li>
-            <li>Why services get masked</li>
-            <li>Why Wi-Fi and bridges don’t mix</li>
-            <li>Why DNS failures masquerade as “no internet”</li>
-            <li>Why DevOps is mostly ownership boundaries</li>
-        </ul>
-        <p>Most people memorize commands. You built models. That’s the difference.</p>
+            <p>You also learned why live USBs exist, why mounted partitions resist resizing, and why LVM exists to
+                reduce friction.</p>
+        </article>
+
+        <article>
+            <div class="meta">Section 3</div>
+            <h2>You met systemd’s sharp edges</h2>
+
+            <p><code>systemd-networkd</code> refused to start because it was masked.</p>
+
+            <ul>
+                <li>Masked ≠ stopped</li>
+                <li>Masked = forbidden to run</li>
+            </ul>
+
+            <p>This was a deliberate desktop networking policy — not random failure.</p>
+        </article>
+
+        <article>
+            <div class="meta">Section 4</div>
+            <h2>Host vs container separation</h2>
+
+            <p>You started <code>systemd-networkd</code> on the host while NetworkManager managed Wi-Fi.</p>
+
+            <p>Result: network conflict.</p>
+
+            <ul>
+                <li>Host → NetworkManager</li>
+                <li>Container → networkd + resolved</li>
+            </ul>
+
+            <p>This separation clarified system boundaries.</p>
+        </article>
+
+        <article>
+            <div class="meta">Section 5</div>
+            <h2>Manual container networking</h2>
+
+            <p><code>--network-veth</code> only creates a link — configuration is manual.</p>
+
+            <ul>
+                <li>Enable networkd</li>
+                <li>Create a <code>.network</code> config</li>
+                <li>Request DHCP</li>
+            </ul>
+
+            <p>Only then did the container gain connectivity.</p>
+        </article>
+
+        <article>
+            <div class="meta">Section 6</div>
+            <h2>DNS debugging fundamentals</h2>
+
+            <p>IP connectivity worked. Domains didn’t.</p>
+
+            <ul>
+                <li>Inspect <code>/etc/resolv.conf</code></li>
+                <li>Enable <code>systemd-resolved</code></li>
+                <li>Fix symlinks and restart services</li>
+            </ul>
+
+            <p>Name resolution restored full connectivity.</p>
+        </article>
+
+        <article>
+            <div class="meta">Section 7</div>
+            <h2>The finished system</h2>
+
+            <p>You built a container with its own:</p>
+
+            <ul>
+                <li>Filesystem</li>
+                <li>Init system</li>
+                <li>Networking stack</li>
+                <li>DNS resolver</li>
+            </ul>
+
+            <p>This clarified how abstractions hide complexity — and how Linux actually behaves.</p>
+        </article>
+
+        <article>
+            <div class="meta">Reflection</div>
+            <h2>The deeper outcome</h2>
+
+            <ul>
+                <li>Disk realities</li>
+                <li>Service masking behavior</li>
+                <li>Network boundaries</li>
+                <li>DNS troubleshooting</li>
+                <li>Operational ownership</li>
+            </ul>
+
+            <p>This wasn’t just setup — it was systems thinking in action.</p>
+        </article>
+
     </div>
+
+    <footer>
+        © 2026 Container Learning Journal
+    </footer>
+
 </body>
 
 </html>
