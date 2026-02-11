@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+
+        body {
+          margin: 0;
+          background: #2b2620;
+          display: flex;
+          justify-content: center;
+          padding: 40px 20px;
+        }
+
+        .paper {
+          max-width: 900px;
+          width: 100%;
+          padding: 40px;
+          background:
+            radial-gradient(circle at 20% 10%, rgba(0,0,0,0.08), transparent 40%),
+            radial-gradient(circle at 80% 90%, rgba(0,0,0,0.1), transparent 50%),
+            #e8dcc2;
+          border-radius: 6px;
+          box-shadow:
+            0 10px 40px rgba(0,0,0,0.6),
+            inset 0 0 80px rgba(0,0,0,0.15);
+          color: #2a241b;
+          font-family: "IBM Plex Mono", monospace;
+          position: relative;
+        }
+
+        .paper::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: repeating-linear-gradient(
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.02) 3px
+          );
+          pointer-events: none;
+        }
+
+        h2 {
+          margin-top: 0;
+          letter-spacing: 1px;
+          opacity: 0.8;
+        }
+
+        pre {
+          margin: 0;
+          white-space: pre-wrap;
+          font-size: 15px;
+          line-height: 1.6;
+        }
+
+        .key { color: #7a3e1d; }
+        .string { color: #1f4d2e; }
+        .number { color: #5c3a8a; }
+        .boolean { color: #b03a2e; }
+
+        .footnote {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px dashed rgba(0,0,0,0.25);
+            font-size: 13px;
+            opacity: 0.75;
+        }
+
+        .footnote .hint {
+            display: block;
+            font-style: italic;
+            margin-bottom: 6px;
+            color: #6e6251;
+        }
+
+        .footnote a {
+            color: #3b5f7a;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .footnote a::after {
+            content: " ↗";
+            opacity: 0.5;
+        }
+
+        .footnote a:hover {
+            text-decoration: underline;
+            opacity: 1;
+        }
+
+    </style>
+
+    <div class="paper">
+        <h2>my_profile.json</h2>
+        <pre id="json"></pre>
+        <div class="footnote">
+            <span class="hint">// archived_reference</span>
+            <a href="/blogs" target="_blank">
+                blog.log
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const profile = {
+            name: "SuzzIT",
+            role: "Software Developer (maybe)",
+            location: "Nepal 🇳🇵",
+            skills: ["JavaScript", "Python", "Flutter", "SQL"],
+            status: "Building things that may or may not work first try",
+            experience_years: 3,
+            available_for_hire: true
+        }
+
+        function syntaxHighlight(json) {
+            json = JSON.stringify(json, null, 2);
+
+            return json.replace(
+                /("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|\b\d+\b)/g,
+                function(match) {
+                    let cls = "number";
+                    if (/^"/.test(match)) {
+                        cls = /:$/.test(match) ? "key" : "string";
+                    } else if (/true|false/.test(match)) {
+                        cls = "boolean";
+                    }
+                    return `<span class="${cls}">${match}</span>`;
+                }
+            )
+        }
+
+        document.getElementById("json").innerHTML = syntaxHighlight(profile);
+    </script>
+{% endblock %}

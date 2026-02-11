@@ -1,0 +1,11 @@
+{
+  "scripts": {},
+  "dependencies": {
+    "express": "^5.2.1",
+    "jinja-js": "^0.1.8",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
