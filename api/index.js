@@ -1,4 +1,5 @@
 const express = require('express')
+const serverless = require('serverless-http')
 const fs = require('fs')
 const nj = require('nunjucks')
 const path = require('path')
@@ -50,3 +51,6 @@ app.get('/test', (req, res) => {
 app.listen(port, () => {
 	console.log(`App running on port ${port}`)
 })
+
+module.exports = app
+module.exports.handler = serverless(app)

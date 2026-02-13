@@ -3,7 +3,8 @@
   "dependencies": {
     "express": "^5.2.1",
     "jinja-js": "^0.1.8",
-    "nunjucks": "^3.2.4"
+    "nunjucks": "^3.2.4",
+    "serverless-http": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
