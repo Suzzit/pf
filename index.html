@@ -1,27 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>Suzzit</title>
+    <title>Suzzit | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-
-        <h1>
-            Hello world!!!
-        </h1>
-
-        <h3>
-            Greetings from SuzzIT
-        </h3>
-
-        <a href="https://blog.sujeetb.com.np" class="btn btn-sm btn-primary" target="_blank">
-            My blogs
-        </a>
+        <a class="navbar-brand fw-bold" href="#">suzzit.dev</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://blog.sujeetb.com.np">
+                        Blogs
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+
+<section class="hero container text-center">
+    <div>
+        <h1>Hello, World</h1>
+        <h3>🙏 Greetings from, <span>SuzzIT</span></h3>
+        <a href="#projects" class="btn btn-custom mt-4">View My Work</a>
+    </div>
+</section>
+
+<section id="about" class="container py-5">
+    <h2 class="section-title text-center">About Me</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <p>
+                I’m a developer who enjoys building scalable web applications and experimenting with system-level concepts.
+                I work with JavaScript, Python, and modern frameworks while constantly pushing into deeper computer science fundamentals.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="container py-5">
+    <h2 class="section-title text-center">Skills</h2>
+    <div class="row text-center">
+        <div class="col-md-3 col-6 mb-4">
+            <div class="card p-3">
+                <h5>HTML</h5>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+            <div class="card p-3">
+                <h5>CSS</h5>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+            <div class="card p-3">
+                <h5>JavaScript</h5>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+            <div class="card p-3">
+                <h5>Python</h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="container py-5">
+    <h2 class="section-title text-center">Projects</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card p-4">
+                <h5>AI Chatbot SaaS</h5>
+                <p>Custom-trained AI agents for businesses using product and store data.</p>
+                <a href="#" class="btn btn-custom btn-sm">View Project</a>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card p-4">
+                <h5>Futsal Booking System</h5>
+                <p>Online court booking platform connecting players and businesses.</p>
+                <a href="#" class="btn btn-custom btn-sm">View Project</a>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card p-4">
+                <h5>Language Learning App</h5>
+                <p>Mobile app built with Flutter to teach regional languages.</p>
+                <a href="#" class="btn btn-custom btn-sm">View Project</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="container py-5 text-center">
+    <h2 class="section-title">Contact</h2>
+    <p>Want to build something ambitious?</p>
+    <a href="mailto:devsuzzit@gmail.com" class="btn btn-custom">Let's Talk</a>
+</section>
+
+<footer class="text-center">
+    <p class="mb-0">© 2026 suzzit</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
