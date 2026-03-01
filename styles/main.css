@@ -8,26 +8,6 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-.navbar {
-    background-color: #121212;
-}
-
-.hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    font-weight: 700;
-}
-
-.hero span {
-    color: var(--primary-color);
-}
-
 .section-title {
     margin-bottom: 40px;
     font-weight: 600;
@@ -56,9 +36,4 @@ body {
 .btn-custom:hover {
     background-color: white;
     color: black;
-}
-
-footer {
-    background-color: #121212;
-    padding: 20px 0;
 }
