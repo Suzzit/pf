@@ -1,127 +1,511 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html class="dark" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Suzzit | Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/images/myself.png" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ARCHITECT.DEV | Digital Architect &amp; Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#004e5f",
+                        "secondary": "#4ffcdc",
+                        "on-primary-fixed-variant": "#00664c",
+                        "on-secondary-fixed-variant": "#006858",
+                        "tertiary-fixed-dim": "#00c7ec",
+                        "tertiary-container": "#00d5fe",
+                        "surface-tint": "#aaffdc",
+                        "surface-container-highest": "#262626",
+                        "on-primary-fixed": "#004734",
+                        "background": "#0e0e0e",
+                        "tertiary-fixed": "#00d5fe",
+                        "secondary-dim": "#3aedce",
+                        "surface-bright": "#2c2c2c",
+                        "surface": "#0e0e0e",
+                        "inverse-surface": "#fcf9f8",
+                        "secondary-fixed": "#4ffcdc",
+                        "surface-dim": "#0e0e0e",
+                        "on-background": "#ffffff",
+                        "inverse-primary": "#006c51",
+                        "on-primary": "#00654b",
+                        "primary-dim": "#00edb4",
+                        "on-tertiary": "#004e5f",
+                        "surface-variant": "#262626",
+                        "on-surface": "#ffffff",
+                        "outline-variant": "#484847",
+                        "primary-fixed": "#00fdc1",
+                        "on-error-container": "#ffa8a3",
+                        "surface-container-high": "#20201f",
+                        "on-error": "#490006",
+                        "secondary-fixed-dim": "#3aedce",
+                        "on-secondary": "#005d4f",
+                        "surface-container-lowest": "#000000",
+                        "surface-container": "#1a1a1a",
+                        "outline": "#767575",
+                        "error-container": "#9f0519",
+                        "on-surface-variant": "#adaaaa",
+                        "on-secondary-fixed": "#00483d",
+                        "primary-fixed-dim": "#00edb4",
+                        "inverse-on-surface": "#565555",
+                        "error": "#ff716c",
+                        "on-primary-container": "#005c44",
+                        "error-dim": "#d7383b",
+                        "surface-container-low": "#131313",
+                        "tertiary-dim": "#00c7ec",
+                        "on-tertiary-container": "#004553",
+                        "primary": "#aaffdc",
+                        "on-secondary-container": "#ddfff4",
+                        "on-tertiary-fixed": "#002f39",
+                        "secondary-container": "#006b5b",
+                        "tertiary": "#74e0ff",
+                        "primary-container": "#00fdc1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        .blur-in-transition {
+            animation: blurIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
 
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="/styles/hero.css">
-    <link rel="stylesheet" href="/styles/navbar.css">
-    <link rel="stylesheet" href="/styles/footer.css">
+        @keyframes blurIn {
+            from {
+                filter: blur(12px);
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                filter: blur(0);
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .code-ghost {
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.03;
+            font-family: monospace;
+            position: absolute;
+            white-space: pre;
+            line-height: 1.2;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #aaffdc;
+        }
+    </style>
 </head>
-<body>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="#">
-            <img src="/images/myself.png" height="40" width="40" loading="lazy">suzzit.dev
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navMenu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://blog.sujeetb.com.np">
-                        Blogs
-                    </a>
-                </li>
-            </ul>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary overflow-x-hidden">
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-[#0e0e0e]/70 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(255,255,255,0.04)] blur-in-transition">
+        <div class="flex justify-between items-center px-12 py-6 max-w-[1440px] mx-auto">
+            <div class="text-xl font-bold tracking-tighter text-[#aaffdc] font-headline">
+                ARCHITECT.DEV
+            </div>
+            <div class="hidden md:flex items-center gap-10">
+                <a class="text-[#aaffdc] border-b-2 border-[#aaffdc] pb-1 font-headline font-bold tracking-tight hover:scale-105 transition-transform duration-300"
+                    href="#work">Work</a>
+                <a class="text-[#adaaaa] hover:text-white transition-colors font-headline font-bold tracking-tight hover:scale-105 transition-transform duration-300"
+                    href="#about">About</a>
+                <a class="text-[#adaaaa] hover:text-white transition-colors font-headline font-bold tracking-tight hover:scale-105 transition-transform duration-300"
+                    href="#skills">Skills</a>
+                <a class="text-[#adaaaa] hover:text-white transition-colors font-headline font-bold tracking-tight hover:scale-105 transition-transform duration-300"
+                    href="#contact">Contact</a>
+            </div>
+            <button
+                class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:scale-105 transition-transform duration-300">
+                Resume
+            </button>
         </div>
-    </div>
-</nav>
-
-<section class="hero container text-center">
-    <div>
-        <h1>Hello, World</h1>
-        <h3>🙏 Greetings from, <span>SuzzIT</span></h3>
-        <a href="#projects" class="btn btn-custom mt-4">View My Work</a>
-    </div>
-</section>
-
-<section id="about" class="container py-5">
-    <h2 class="section-title text-center">About Me</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <p>
-                I’m a developer who enjoys building scalable web applications and experimenting with system-level concepts.
-                I work with JavaScript, Python, and modern frameworks while constantly pushing into deeper computer science fundamentals.
-            </p>
-        </div>
-    </div>
-</section>
-
-<section id="skills" class="container py-5">
-    <h2 class="section-title text-center">Skills</h2>
-    <div class="row text-center">
-        <div class="col-md-3 col-6 mb-4">
-            <div class="card p-3">
-                <h5>HTML</h5>
+    </nav>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex flex-col justify-center px-12 pt-32 pb-40 overflow-hidden">
+            <!-- Code Ghost Texture -->
+            <div class="code-ghost text-[6rem] -top-20 -left-10 rotate-12">
+                function solveComplexProblem(inputs) {
+                return inputs.map(node =&gt; {
+                const result = architecture.optimize(node);
+                return process.env.STABLE ? result : fallback(result);
+                });
+                }
+            </div>
+            <div class="max-w-[1440px] mx-auto w-full relative z-10">
+                <div class="blur-in-transition">
+                    <span
+                        class="text-primary font-headline tracking-[0.2em] text-xs font-bold uppercase block mb-6">Based
+                        in Silicon Valley</span>
+                    <h1
+                        class="font-headline font-bold text-[clamp(3.5rem,10vw,8rem)] leading-[0.9] tracking-tighter mb-8">
+                        Digital Architect <br />
+                        <span class="text-on-surface-variant">Full-Stack Engineer.</span>
+                    </h1>
+                    <p class="text-on-surface-variant max-w-2xl text-xl leading-relaxed mb-12 font-light">
+                        Engineering resilient systems and immersive digital experiences with architectural precision. I
+                        transform complex requirements into scalable, elegant codebases.
+                    </p>
+                    <div class="flex flex-wrap gap-6">
+                        <a class="bg-gradient-to-br from-primary to-secondary text-on-primary px-8 py-4 rounded-lg font-bold text-lg hover:scale-105 transition-all flex items-center gap-2 group"
+                            href="#work">
+                            View My Work
+                            <span
+                                class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </a>
+                        <a class="border border-outline-variant/20 px-8 py-4 rounded-lg font-bold text-lg hover:bg-surface-container transition-colors"
+                            href="#contact">
+                            Start a Conversation
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
+                <span class="text-[10px] font-headline tracking-widest uppercase">Scroll</span>
+                <div class="w-[1px] h-12 bg-on-surface"></div>
+            </div>
+        </section>
+        <!-- About Me Section (The Philosophy) -->
+        <section class="bg-surface-container-low py-40 px-12" id="about">
+            <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
+                <div class="sticky top-40">
+                    <h2 class="font-headline font-bold text-5xl mb-8 tracking-tight">The Core <span
+                            class="text-primary">Philosophy</span></h2>
+                    <div class="space-y-8 text-on-surface-variant text-lg leading-relaxed">
+                        <p>
+                            I don't just build websites; I architect digital infrastructures. Every line of code is
+                            evaluated for its contribution to the system's long-term health and scalability.
+                        </p>
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="flex items-center gap-4">
+                                <span class="text-primary font-headline font-black text-2xl">01</span>
+                                <div>
+                                    <h4 class="text-on-surface font-bold">Precision</h4>
+                                    <p class="text-sm">Meticulous attention to edge cases and type safety.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-primary font-headline font-black text-2xl">02</span>
+                                <div>
+                                    <h4 class="text-on-surface font-bold">Efficiency</h4>
+                                    <p class="text-sm">Optimized rendering cycles and lean backend logic.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-primary font-headline font-black text-2xl">03</span>
+                                <div>
+                                    <h4 class="text-on-surface font-bold">Innovation</h4>
+                                    <p class="text-sm">Leveraging bleeding-edge tech to solve legacy problems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="aspect-[4/5] rounded-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 bg-surface-container-highest">
+                        <img alt="Professional developer portrait" class="w-full h-full object-cover"
+                            data-alt="close-up portrait of a professional male developer with glasses in a dark moody studio setting with subtle blue backlighting"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8aeGskx-ZLV1XVW-NcND-IkVL1B0H-n_VrmHHhym4DZ0oYav4CeI0wRSrIVBeugg4c0xyZARL5YyDu2K3u7tv-G8t8MWwsfESv-VNU0tZz4xomuOzTZViXl6SpcwM-nXoAP-gOPngWneJrrVxliqaWZ0N_PIXRJfw8GeLbfOUNe2mideijp5nHVGjVcLKFoK_zpl23G1eMkeaenoLUBUVLDT-DRw8vX9-wJGxJTb-b4gcZ56mPYBbA0nDq0R7cmOgQAmwlrAHLMk" />
+                    </div>
+                    <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-primary/10 blur-[100px] -z-10"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Skills Grid (Bento Style) -->
+        <section class="py-40 px-12" id="skills">
+            <div class="max-w-[1440px] mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                    <div>
+                        <span
+                            class="text-primary font-headline tracking-[0.2em] text-xs font-bold uppercase block mb-4">Stack
+                            &amp; Tools</span>
+                        <h2 class="font-headline font-bold text-5xl tracking-tight">Technical Arsenal</h2>
+                    </div>
+                    <p class="text-on-surface-variant max-w-md text-right">
+                        A curated selection of technologies chosen for their performance, developer experience, and
+                        industrial reliability.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Tech Card 1 -->
+                    <div
+                        class="bg-surface-container p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-4xl text-primary mb-6 group-hover:scale-110 transition-transform block">javascript</span>
+                        <h3 class="font-bold text-xl mb-2">React / Next.js</h3>
+                        <p class="text-on-surface-variant text-sm">Building complex SPAs with atomic design principles.
+                        </p>
+                    </div>
+                    <!-- Tech Card 2 -->
+                    <div
+                        class="bg-surface-container p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-4xl text-primary mb-6 group-hover:scale-110 transition-transform block">terminal</span>
+                        <h3 class="font-bold text-xl mb-2">Node.js / Go</h3>
+                        <p class="text-on-surface-variant text-sm">High-performance microservices and distributed
+                            systems.</p>
+                    </div>
+                    <!-- Tech Card 3 -->
+                    <div
+                        class="bg-surface-container p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors group md:col-span-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span
+                                    class="material-symbols-outlined text-4xl text-primary mb-6 group-hover:scale-110 transition-transform block">cloud</span>
+                                <h3 class="font-bold text-xl mb-2">AWS Infrastructure</h3>
+                                <p class="text-on-surface-variant text-sm max-w-xs">Certified AWS Solutions Architect
+                                    focusing on serverless and edge computing architectures.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 justify-end max-w-[200px]">
+                                <span
+                                    class="px-3 py-1 bg-surface-container-high rounded-full text-[10px] font-bold uppercase tracking-widest">Lambda</span>
+                                <span
+                                    class="px-3 py-1 bg-surface-container-high rounded-full text-[10px] font-bold uppercase tracking-widest">S3</span>
+                                <span
+                                    class="px-3 py-1 bg-surface-container-high rounded-full text-[10px] font-bold uppercase tracking-widest">Terraform</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tech Card 4 -->
+                    <div
+                        class="bg-surface-container p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-4xl text-primary mb-6 group-hover:scale-110 transition-transform block">database</span>
+                        <h3 class="font-bold text-xl mb-2">PostgreSQL</h3>
+                        <p class="text-on-surface-variant text-sm">Database modeling for integrity and complex
+                            relational queries.</p>
+                    </div>
+                    <div
+                        class="bg-surface-container p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-4xl text-primary mb-6 group-hover:scale-110 transition-transform block">code</span>
+                        <h3 class="font-bold text-xl mb-2">TypeScript</h3>
+                        <p class="text-on-surface-variant text-sm">Ensuring system reliability through strict type
+                            definitions.</p>
+                    </div>
+                    <div
+                        class="bg-surface-container p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-4xl text-primary mb-6 group-hover:scale-110 transition-transform block">architecture</span>
+                        <h3 class="font-bold text-xl mb-2">Docker</h3>
+                        <p class="text-on-surface-variant text-sm">Containerization for consistent deployment pipelines.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-surface-container p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-4xl text-primary mb-6 group-hover:scale-110 transition-transform block">analytics</span>
+                        <h3 class="font-bold text-xl mb-2">Python</h3>
+                        <p class="text-on-surface-variant text-sm">Data processing pipelines and automation scripts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Featured Projects (Asymmetric) -->
+        <section class="py-40" id="work">
+            <div class="max-w-[1440px] mx-auto px-12">
+                <h2 class="font-headline font-bold text-7xl tracking-tighter mb-32">Selected <span
+                        class="text-primary">Artifacts</span></h2>
+                <div class="space-y-64">
+                    <!-- Project 1 -->
+                    <div class="flex flex-col md:flex-row gap-20 items-center">
+                        <div class="w-full md:w-5/12 order-2 md:order-1">
+                            <span
+                                class="text-primary font-headline tracking-[0.2em] text-xs font-bold uppercase block mb-4">Fintech
+                                Ecosystem</span>
+                            <h3 class="font-headline font-bold text-5xl mb-6">Velocis Ledger</h3>
+                            <p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+                                A real-time transaction processing engine handling 50k+ transactions per second.
+                                Re-architected for horizontal scalability using distributed queues and micro-services.
+                            </p>
+                            <div class="flex flex-wrap gap-3 mb-10">
+                                <span
+                                    class="px-4 py-2 bg-surface-container-high rounded-full text-xs font-bold tracking-widest uppercase">Go</span>
+                                <span
+                                    class="px-4 py-2 bg-surface-container-high rounded-full text-xs font-bold tracking-widest uppercase">Kafka</span>
+                                <span
+                                    class="px-4 py-2 bg-surface-container-high rounded-full text-xs font-bold tracking-widest uppercase">Kubernetes</span>
+                            </div>
+                            <a class="inline-flex items-center gap-4 text-on-surface font-bold group border-b border-primary/20 pb-2"
+                                href="#">
+                                Case Study
+                                <span
+                                    class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                        <div class="w-full md:w-7/12 order-1 md:order-2">
+                            <div class="bg-surface-container-low p-4 rounded-xl shadow-2xl">
+                                <img alt="Fintech dashboard UI"
+                                    class="w-full h-auto rounded-lg grayscale hover:grayscale-0 transition-all duration-700"
+                                    data-alt="modern minimalist fintech dashboard interface with clean data visualizations and dark sleek UI elements on a high resolution screen"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1QuUh4rciSaB1-OriTPeCcNbryvfdVQicdb8I-jT_L8eNu4yXTYU7Cv2Nkjfu9lKedgVFKTO6CufWFWiDKMcBNzTs_mdtz2ROtIz4afkOo66jhhGzKlspe0swYneZ1vDwQsv8bZ-WI10RvXyinPR4pp_pFAjHXBf09ulx5k89QrpuEuTKzNqY1E9jVjo7e4sJlSWJ9uGF-apyrpNpAt8NNDAU7pzc6nyYdtUqMmW86r0M6MmBjZ74YyjWrh0mnw3OLIAXo9i8e90" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="flex flex-col md:flex-row gap-20 items-center">
+                        <div class="w-full md:w-7/12">
+                            <div class="bg-surface-container-low p-4 rounded-xl shadow-2xl">
+                                <img alt="Analytics platform screenshot"
+                                    class="w-full h-auto rounded-lg grayscale hover:grayscale-0 transition-all duration-700"
+                                    data-alt="professional SaaS analytics platform featuring complex heatmaps and 3D data representations in a high-end dark theme"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAu0OABz7lCNNz7wVDbSPA0ea_15HHM-oS0zj69RQ0Mm_piTeWrlWyq7EcXVnxuezODLAyIr-hyqQGNvTLYrcuN_CtVUBya86s15DL0qI3wUXtxDhRTzUgtS7L_qR8DqMGGJPRnLYDF1M-KikcN2uW04KNmLmD6bzMJgmGyyMvxJHTED5dT9FDeyOX60V_xf_JM7DX24oZwKii3XbTRjmB8qzIw5f1iT0BwS22-39IwmUBRLyt-_pDUVDu_O-tz-RIJ1n2ioxmOwg" />
+                            </div>
+                        </div>
+                        <div class="w-full md:w-5/12">
+                            <span
+                                class="text-primary font-headline tracking-[0.2em] text-xs font-bold uppercase block mb-4">SaaS
+                                Platform</span>
+                            <h3 class="font-headline font-bold text-5xl mb-6">Cognito Insights</h3>
+                            <p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+                                A headless BI tool for engineering managers to track team velocity and code quality
+                                across 100+ repositories. Focused on extreme performance for large datasets.
+                            </p>
+                            <div class="flex flex-wrap gap-3 mb-10">
+                                <span
+                                    class="px-4 py-2 bg-surface-container-high rounded-full text-xs font-bold tracking-widest uppercase">React</span>
+                                <span
+                                    class="px-4 py-2 bg-surface-container-high rounded-full text-xs font-bold tracking-widest uppercase">PostgreSQL</span>
+                                <span
+                                    class="px-4 py-2 bg-surface-container-high rounded-full text-xs font-bold tracking-widest uppercase">D3.js</span>
+                            </div>
+                            <a class="inline-flex items-center gap-4 text-on-surface font-bold group border-b border-primary/20 pb-2"
+                                href="#">
+                                Case Study
+                                <span
+                                    class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Me -->
+        <section class="py-40 px-12 bg-surface-container-lowest" id="contact">
+            <div class="max-w-[1440px] mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+                    <div>
+                        <h2 class="font-headline font-bold text-6xl tracking-tight mb-8">Build the <br /><span
+                                class="text-primary">Future.</span></h2>
+                        <p class="text-on-surface-variant text-xl mb-12">
+                            Have a complex system that needs architectural clarity? <br />Let's discuss how we can
+                            engineer your vision into reality.
+                        </p>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-6">
+                                <span class="material-symbols-outlined text-primary">mail</span>
+                                <span class="font-bold text-xl">hello@architect.dev</span>
+                            </div>
+                            <div class="flex items-center gap-6">
+                                <span class="material-symbols-outlined text-primary">location_on</span>
+                                <span class="font-bold text-xl">Palo Alto, CA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container p-12 rounded-2xl border border-white/5">
+                        <form class="space-y-8">
+                            <div>
+                                <label
+                                    class="block font-headline font-bold text-xs uppercase tracking-widest mb-4 opacity-50">Full
+                                    Name</label>
+                                <input
+                                    class="w-full bg-surface-container-lowest border border-outline-variant/20 focus:border-primary rounded-lg p-4 text-on-surface outline-none transition-all placeholder:text-outline/40"
+                                    placeholder="John Architect" type="text" />
+                            </div>
+                            <div>
+                                <label
+                                    class="block font-headline font-bold text-xs uppercase tracking-widest mb-4 opacity-50">Email
+                                    Address</label>
+                                <input
+                                    class="w-full bg-surface-container-lowest border border-outline-variant/20 focus:border-primary rounded-lg p-4 text-on-surface outline-none transition-all placeholder:text-outline/40"
+                                    placeholder="john@example.com" type="email" />
+                            </div>
+                            <div>
+                                <label
+                                    class="block font-headline font-bold text-xs uppercase tracking-widest mb-4 opacity-50">Project
+                                    Brief</label>
+                                <textarea
+                                    class="w-full bg-surface-container-lowest border border-outline-variant/20 focus:border-primary rounded-lg p-4 text-on-surface outline-none transition-all placeholder:text-outline/40"
+                                    placeholder="Tell me about your system architecture needs..." rows="4"></textarea>
+                            </div>
+                            <button
+                                class="w-full bg-primary text-on-primary font-black py-5 rounded-lg text-lg hover:scale-[1.02] active:scale-95 transition-all"
+                                type="submit">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-[#0e0e0e] w-full py-20 px-12 border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8 w-full max-w-[1440px] mx-auto">
+            <div class="text-lg font-bold text-[#aaffdc] font-headline">
+                ARCHITECT.DEV
+            </div>
+            <div class="flex gap-8">
+                <a class="text-[#adaaaa] hover:text-[#aaffdc] transition-colors duration-200 font-body text-sm tracking-wide"
+                    href="#">GitHub</a>
+                <a class="text-[#adaaaa] hover:text-[#aaffdc] transition-colors duration-200 font-body text-sm tracking-wide"
+                    href="#">LinkedIn</a>
+                <a class="text-[#adaaaa] hover:text-[#aaffdc] transition-colors duration-200 font-body text-sm tracking-wide"
+                    href="#">Twitter</a>
+                <a class="text-[#adaaaa] hover:text-[#aaffdc] transition-colors duration-200 font-body text-sm tracking-wide"
+                    href="#">ReadCV</a>
+            </div>
+            <div class="text-[#adaaaa] font-body text-sm tracking-wide">
+                © 2024 Digital Architect. Built with Precision.
             </div>
         </div>
-        <div class="col-md-3 col-6 mb-4">
-            <div class="card p-3">
-                <h5>CSS</h5>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-4">
-            <div class="card p-3">
-                <h5>JavaScript</h5>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 mb-4">
-            <div class="card p-3">
-                <h5>Python</h5>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="projects" class="container py-5">
-    <h2 class="section-title text-center">Projects</h2>
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card p-4">
-                <h5>AI Chatbot SaaS</h5>
-                <p>Custom-trained AI agents for businesses using product and store data.</p>
-                <a href="#" class="btn btn-custom btn-sm">View Project</a>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card p-4">
-                <h5>Futsal Booking System</h5>
-                <p>Online court booking platform connecting players and businesses.</p>
-                <a href="#" class="btn btn-custom btn-sm">View Project</a>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card p-4">
-                <h5>Language Learning App</h5>
-                <p>Mobile app built with Flutter to teach regional languages.</p>
-                <a href="#" class="btn btn-custom btn-sm">View Project</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="contact" class="container py-5 text-center">
-    <h2 class="section-title">Contact</h2>
-    <p>Want to build something ambitious?</p>
-    <a href="mailto:devsuzzit@gmail.com" class="btn btn-custom">Let's Talk</a>
-</section>
-
-<footer class="text-center">
-    <p class="mb-0">© 2026 suzzit</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
 </body>
+
 </html>
